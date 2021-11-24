@@ -1,5 +1,5 @@
 //
-// Copyright (c) Stewart H. Whitman, 2020.
+// Copyright (c) Stewart H. Whitman, 2020-2021.
 //
 // File:    pi-standoff-mount.scad
 // Project: Raspberry PI Mount
@@ -70,8 +70,8 @@ function pi_reverse_xy(v) = [pi_reverse ? pi_size.x-v.x : v.x, v.y ];
 
 // Models:
 module pi4() {
-  linear_extrude(height = 1, center = true, convexity = 10)
-     import( file = "rpi_MECH_4b_4p0-with_mounting.dxf" );
+  translate( [53,49,-14] )
+    import( file = "RPi4.STL" );
 } // end pi4
 
 module pi3() {
@@ -102,7 +102,7 @@ module pi(transparency=0.5) {
     color("gold", transparency )
       for( p = pi_holes_xy )
 	difference() {
-	  translate( concat( pi_reverse_xy(p), 0 ) ) cylinder( d=6, h=height, $fn=6 );  
+	  translate( concat( pi_reverse_xy(p), 0 ) ) cylinder( d=6, h=height, $fn=6 );
 	  hole( concat( pi_reverse_xy(p), height ), pi_hole_dia );
         }
   }
@@ -110,10 +110,7 @@ module pi(transparency=0.5) {
 
 module hole(pos,dia) {
   p = len(pos) < 3 ? concat( pos, 100 ) : pos;
-  difference() {
-    children();
-    translate( [p.x,p.y,-SMIDGE] ) cylinder( d=dia, h=p.z+2*SMIDGE);
-  }
+  translate( [p.x,p.y,-SMIDGE] ) cylinder( d=dia, h=p.z+2*SMIDGE);
 } // end hole
 
 module base() {

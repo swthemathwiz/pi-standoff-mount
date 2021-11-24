@@ -1,11 +1,13 @@
 #
-# Copyright (c) Stewart Whitman, 2020.
+# Copyright (c) Stewart Whitman, 2020-2021.
 #
 # File:    Makefile
 # Project: Raspberry PI Mount
 # License: CC BY-NC-SA 4.0 (Attribution-NonCommercial-ShareAlike)
 # Desc:    Makefile for directory
 #
+
+NAME = pi-standoff-mount
 
 OPENSCAD = openscad
 
@@ -17,9 +19,16 @@ SRCS = \
 BUILDS = \
 	pi-standoff-mount.scad \
 
+EXTRAS = \
+	Makefile \
+	README.md \
+	LICENSE.txt \
+
 TARGETS = $(BUILDS:.scad=.stl)
 
 IMAGES = $(BUILDS:.scad=.png)
+
+SOURCEZIP = $(NAME)-source.zip
 
 DEPDIR := .deps
 DEPFLAGS = -d $(DEPDIR)/$*.d
@@ -38,8 +47,13 @@ images: $(IMAGES)
 %.png : %.scad
 	$(RENDER.scad) $<
 
+$(SOURCEZIP): $(EXTRAS) $(SRCS) $(BUILDS)
+	(for F in $^; do echo $$F ; done) | zip -@ - > $@
+
+source: $(SOURCEZIP)
+
 clean:
-	rm -f *.stl *.bak *.png
+	rm -f *.stl *.bak *.png $(SOURCEZIP)
 
 distclean: clean
 	rm -rf $(DEPDIR)
