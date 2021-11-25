@@ -70,6 +70,9 @@ mount_hidden_inset_diameter = 6;
 // Height of standoff
 standoff_height = 8;
 
+// Circular diameter of standoff
+standoff_diameter = 6;
+
 // pi_reverse_xy: Reverse the pi's orientation if requested
 function pi_reverse_xy(v) = [pi_reverse ? pi_size.x-v.x : v.x, v.y ];
 
@@ -87,6 +90,15 @@ module pi3() {
   translate( [-3,-2, -2] ) // offset for connectors/sdcard
     import( file = "Raspberry_Pi_3_Light_Version.STL" );
 } // end pi3
+
+// hexagon:
+//
+// Create an extruded hexagon with height <h> and
+// circumscribed circle diameter <d> 
+//
+module hexagon( d, h ) {
+  cylinder( d=d, h=h, $fn=6 );
+}
 
 // pi:
 //
@@ -114,7 +126,7 @@ module pi(transparency=0.5) {
     color("gold", transparency )
       for( p = pi_holes_xy )
 	difference() {
-	  translate( concat( pi_reverse_xy(p), 0 ) ) cylinder( d=6, h=standoff_height, $fn=6 );
+	  translate( concat( pi_reverse_xy(p), 0 ) ) hexagon( d=standoff_diameter, h=standoff_height );
 	  hole( concat( pi_reverse_xy(p), standoff_height ), pi_hole_diameter );
         }
   }
