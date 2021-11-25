@@ -31,7 +31,7 @@ pi_holes_xy = [ pi_holes_offset, pi_holes_offset + [0,49], pi_holes_offset + [ 5
 pi_holes_y  = [ pi_holes_offset.y, pi_holes_offset.y+49 ];
 
 // Diameter of holes under pi
-pi_hole_dia = 2.7;
+pi_hole_diameter = 2.7;
 
 /* [Mount] */
 // Offset of pi from sides of mount
@@ -47,7 +47,7 @@ mount_corner_radius = 3;
 mount_handle_size = [ 15, 0 ];
 
 // Diameter of the two large holes for mounting the mount
-mount_hole_dia = 4;
+mount_hole_diameter = 4;
 
 // Hole adjustment
 mount_hole_adjustment = [ -2, +2 ];
@@ -64,11 +64,20 @@ mount_cutout_size = concat( pi_size-[1*mount_cutout.x,2*mount_cutout.y], mount_t
 mount_hidden_inset_depth = 3;
 
 // Diameter of hidden recess for standoff screws in mount
-mount_hidden_inset_dia = 6;
+mount_hidden_inset_diameter = 6;
 
+/* [Hidden] */
+// Height of standoff
+standoff_height = 8;
+
+// pi_reverse_xy: Reverse the pi's orientation if requested
 function pi_reverse_xy(v) = [pi_reverse ? pi_size.x-v.x : v.x, v.y ];
 
 // Models:
+//
+// pi4 - Raspberry Pi 4 Model from Coder-Tronics on Thingiverse
+// pi3 - Raspberry Pi 3 Model B Reference Design from Mechatronics Art on GrabCAD
+//
 module pi4() {
   translate( [53,49,-14] )
     import( file = "RPi4.STL" );
@@ -79,19 +88,22 @@ module pi3() {
     import( file = "Raspberry_Pi_3_Light_Version.STL" );
 } // end pi3
 
-module pi_rotate() {
-  if( pi_reverse )
-    translate( concat( +pi_size/2, 0 ) ) rotate( 180 ) translate( concat( -pi_size/2, 0 ) ) children();
-  else
-    children();
-} // end pi_rotate
-
+// pi:
+//
+// Display the Raspberry PI Model with Stand-Offs
+//
 module pi(transparency=0.5) {
-  height = 8;
+  // pi_rotate: Rotate the pi if requested.
+  module pi_rotate() {
+    if( pi_reverse )
+      translate( concat( +pi_size/2, 0 ) ) rotate( 180 ) translate( concat( -pi_size/2, 0 ) ) children();
+    else
+      children();
+  } // end pi_rotate
 
   translate( [0,mount_handle_size.y/2, 0 ] + concat( mount_pi_offset, mount_thickness ) ) {
     color("red", transparency )
-      translate( [0,0,height] )
+      translate( [0,0,standoff_height] )
 	pi_rotate() {
 	  if( show_selection == "mount/pi4" )
 	    pi4();
@@ -102,17 +114,25 @@ module pi(transparency=0.5) {
     color("gold", transparency )
       for( p = pi_holes_xy )
 	difference() {
-	  translate( concat( pi_reverse_xy(p), 0 ) ) cylinder( d=6, h=height, $fn=6 );
-	  hole( concat( pi_reverse_xy(p), height ), pi_hole_dia );
+	  translate( concat( pi_reverse_xy(p), 0 ) ) cylinder( d=6, h=standoff_height, $fn=6 );
+	  hole( concat( pi_reverse_xy(p), standoff_height ), pi_hole_diameter );
         }
   }
 } // end pi
 
-module hole(pos,dia) {
+// hole:
+//
+// Position a hole with a particular diameter
+//
+module hole(pos,diameter) {
   p = len(pos) < 3 ? concat( pos, 100 ) : pos;
-  translate( [p.x,p.y,-SMIDGE] ) cylinder( d=dia, h=p.z+2*SMIDGE);
+  translate( [p.x,p.y,-SMIDGE] ) cylinder( d=diameter, h=p.z+2*SMIDGE);
 } // end hole
 
+// base:
+//
+// Create the base layout.
+//
 module base() {
   difference() {
     rounded_side_cube( mount_base_size, radius=mount_corner_radius );
@@ -122,20 +142,24 @@ module base() {
   }
 } // end base
 
+// mount:
+//
+// Base with drilled holes.
+//
 module mount() {
   difference() {
     base();
     translate( [0,mount_handle_size.y/2, 0 ] ) {
       translate( concat( mount_pi_offset, 0 ) ) {
 	for( p = pi_holes_xy ) {
-	  hole( concat( pi_reverse_xy(p), mount_thickness ), pi_hole_dia );
+	  hole( concat( pi_reverse_xy(p), mount_thickness ), pi_hole_diameter );
 	  if( mount_hidden_inset_depth > 0 )
-	    hole( concat( pi_reverse_xy(p), mount_hidden_inset_depth ), mount_hidden_inset_dia );
+	    hole( concat( pi_reverse_xy(p), mount_hidden_inset_depth ), mount_hidden_inset_diameter );
 	}
       }
       for( y = pi_holes_y )
 	translate( [mount_hole_adjustment.x, y < mount_base_size.y/2 ? mount_hole_adjustment.y : -mount_hole_adjustment.y, 0] )
-	  hole( concat( [mount_base_size.x-pi_holes_offset.x-mount_pi_offset.x, mount_pi_offset.y+y], mount_base_size.z ), mount_hole_dia );
+	  hole( concat( [mount_base_size.x-pi_holes_offset.x-mount_pi_offset.x, mount_pi_offset.y+y], mount_base_size.z ), mount_hole_diameter );
     }
   }
 } // end mount
