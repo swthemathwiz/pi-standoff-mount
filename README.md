@@ -2,7 +2,7 @@
 
 This is a 3D-printable [Openscad](https://openscad.org/) wall mount with stand offs for the Raspberry PI.
 
-[Image of mount](../media/media/mount-view.jpg?raw=true)
+[Image of mount](https://github.com/swthemathwiz/pi-standoff-mount/blob/a52a44623bfc2396973c2729546dcc3af8dd4196/media/mount-view.jpg?raw=true)
 
 ## Source
 
