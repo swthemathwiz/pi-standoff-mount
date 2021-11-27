@@ -3,3 +3,5 @@
 *.bak
 .deps
 pi-standoff-mount-source.zip
+*.STL
+media
