@@ -28,8 +28,6 @@ TARGETS = $(BUILDS:.scad=.stl)
 IMAGES = $(BUILDS:.scad=.png)
 ICONS = $(BUILDS:.scad=.icon.png)
 
-SOURCEZIP = $(NAME)-source.zip
-
 DEPDIR := .deps
 DEPFLAGS = -d $(DEPDIR)/$*.d
 
@@ -53,13 +51,8 @@ icons : $(ICONS)
 %.icon.png : %.scad
 	$(RENDERICON.scad) $<
 
-$(SOURCEZIP): $(EXTRAS) $(SRCS) $(BUILDS)
-	(for F in $^; do echo $$F ; done) | zip -@ - > $@
-
-source: $(SOURCEZIP)
-
 clean:
-	rm -f *.stl *.bak *.png $(SOURCEZIP)
+	rm -f *.stl *.bak *.png
 
 distclean: clean
 	rm -rf $(DEPDIR)
