@@ -25,8 +25,8 @@ EXTRAS = \
 	LICENSE.txt \
 
 TARGETS = $(BUILDS:.scad=.stl)
-
 IMAGES = $(BUILDS:.scad=.png)
+ICONS = $(BUILDS:.scad=.icon.png)
 
 SOURCEZIP = $(NAME)-source.zip
 
@@ -35,10 +35,13 @@ DEPFLAGS = -d $(DEPDIR)/$*.d
 
 COMPILE.scad = $(OPENSCAD) -o $@ $(DEPFLAGS)
 RENDER.scad = $(OPENSCAD) -o $@
+RENDERICON.scad = $(OPENSCAD) -o $@ --colorscheme Tomorrow --imgsize=128,128
 
 all: $(TARGETS)
 
 images: $(IMAGES)
+
+icons : $(ICONS)
 
 %.stl : %.scad
 %.stl : %.scad $(DEPDIR)/%.d | $(DEPDIR)
@@ -46,6 +49,9 @@ images: $(IMAGES)
 
 %.png : %.scad
 	$(RENDER.scad) $<
+
+%.icon.png : %.scad
+	$(RENDERICON.scad) $<
 
 $(SOURCEZIP): $(EXTRAS) $(SRCS) $(BUILDS)
 	(for F in $^; do echo $$F ; done) | zip -@ - > $@

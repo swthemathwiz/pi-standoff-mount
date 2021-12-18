@@ -8,6 +8,8 @@ This is a 3D-printable [Openscad](https://openscad.org/) wall mount with stand o
 
 The wall mount is built using Openscad. _pi-standoff-mount.scad_ is the main file for the wall mount.
 
+[![View Model](../media/media/pi-standoff-mount.icon.png)](../media/media/pi-standoff-mount.stl "View Model of PI Standoff Mount")
+
 ### Raspberry Pi Models
 
 Models are used to visualize and verify the relative positions of ports and mounts on the stand-offs and are optional. There are two models:
