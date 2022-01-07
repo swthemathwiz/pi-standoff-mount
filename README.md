@@ -11,6 +11,10 @@ This is a 3D-printable [OpenSCAD](https://openscad.org/) wall mount with stand o
 The model has four stand-offs and two wall attachments. Many dimensions can be modified and adjusted by using the OpenSCAD customizer.
 
 [![View Model](../media/media/pi-standoff-mount.icon.png)](../media/media/pi-standoff-mount.stl "View Model of PI Standoff Mount")
+ 
+## Source
+
+The wall mount is built using OpenSCAD. _pi-standoff-mount.scad_ is the main file for the wall mount.
 
 ### Raspberry Pi Models
 
@@ -19,10 +23,6 @@ Note that Raspberry PI Models can be used to visualize and verify the relative p
 1. Raspberry Pi 3 Model B Reference Design from [Mechatronics Art on GrabCAD](https://grabcad.com/library/raspberry-pi-3-reference-design-model-b-rpi-raspberrypi-raspberry-pi-1) in file _Raspberry_Pi_3_Light_Version.STL_.
 
 2. Raspberry Pi 4 Model from [Coder-Tronics on Thingiverse](https://www.thingiverse.com/thing:3732868) in file _RPi4.STL_.
- 
-## Source
-
-The wall mount is built using OpenSCAD. _pi-standoff-mount.scad_ is the main file for the wall mount.
 
 ## Printing
 
