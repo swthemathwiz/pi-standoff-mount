@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This is a 3D-printable [OpenSCAD](https://openscad.org/) wall mount with stand offs for the Raspberry Pi. It is a very simple alternative to a full case that is quick to print and install.
+This is a 3D-printable [OpenSCAD](https://openscad.org/) wall mount with stand offs for the [Raspberry Pi](https://www.raspberrypi.org/) Standard (85.6 mm × 56.5 mm) form factor (2B/3B/3B+/4B). It is a very simple alternative to a full case that is simple and quick to print and install.
 
 ![Image of mount](../media/media/mount-view.jpg?raw=true)
 
