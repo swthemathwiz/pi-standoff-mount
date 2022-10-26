@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This is a 3D-printable [OpenSCAD](https://openscad.org/) wall mount with stand
+This is a 3D-printable [OpenSCAD](https://openscad.org/) mount with stand
 offs for the [Raspberry Pi](https://www.raspberrypi.org/) Standard (85.6 mm
 × 56.5 mm) form factor (models 2B/3B/3B+/4B). It is a very simple alternative
 to a full case that is simple and quick to print and install.
@@ -11,15 +11,21 @@ to a full case that is simple and quick to print and install.
 
 ## Model
 
-The model has four stand-offs and two wall attachments. Many dimensions can be
-modified and adjusted by using the OpenSCAD customizer.
+There is one model:
 
-[![View Model](../media/media/pi-standoff-mount.icon.png)](../media/media/pi-standoff-mount.stl "View Model of Pi Standoff Mount")
+<div class="model" data-name="Pi Standoff Mount" data-icon-size="128" data-left-icon="pi-standoff-mount.icon.png" data-left="pi-standoff-mount">
+
+### Mount
+
+The mount has four holes for stand-offs and two holes for wall attachments. Many dimensions
+can be modified and adjusted by working with source and the OpenSCAD customizer.
+
+</div>
 
 ## Source
 
-The wall mount is built using OpenSCAD. *pi-standoff-mount.scad* is the main
-file for the wall mount.
+The mount is built using OpenSCAD. *pi-standoff-mount.scad* is the main
+file for the mount.
 
 ### Raspberry Pi Models
 
@@ -41,10 +47,11 @@ upside down in your slicer software before printing.
 
 ## Installation
 
-You'll need four stand-offs with two matching screws on each end (eight in
-total), along with two more screws to attach the entire mount to the wall.
+You'll need four female stand-offs with two matching screws on either end
+(eight in total), along with two more screws if you wish to attach the
+entire mount to a wall.
 
 1.  Screw the four stand offs into the base with small screws from the
-    concealled recesses on the bottom of the mounts.
+    concealed recesses on the bottom of the mounts.
 2.  Two larger screws go through the base into the wall.
 3.  Screw the Raspberry Pi onto the stand-offs.
