@@ -1,11 +1,33 @@
 //
-// Copyright (c) Stewart Whitman, 2020-2021.
+// Copyright (c) Stewart H. Whitman, 2020-2022.
 //
 // File:    rounded.scad
 // Project: General
 // License: CC BY-NC-SA 4.0 (Attribution-NonCommercial-ShareAlike)
-// Desc:    Rounded cube/cylinder utilities
+// Desc:    Rounded square/cube/cylinder utilities
 //
+
+// rounded_side_square:
+//
+// Generate a square of <size> with a round-over <radius> in
+// the X/Y direction. Centered optionally like a square.
+//
+module rounded_side_square( size, radius, center=false ) {
+  assert( is_num(size) || is_list(size) );
+  assert( is_num(radius) && radius >= 0 );
+
+  c = is_list(size) ? size : [size,size];
+
+  assert( len(c) == 2 );
+  assert( is_num(c.x) );
+  assert( is_num(c.y) );
+  assert( c.x > 2*radius );
+  assert( c.y > 2*radius );
+
+  offset( r=radius )
+    offset( delta=-radius )
+      square( c, center=center );
+} // end rounded_side_square
 
 // rounded_side_cube:
 //
@@ -14,20 +36,33 @@
 //
 module rounded_side_cube( size, radius, center=false ) {
   assert( is_num(size) || is_list(size) );
-  assert( is_num(radius) && radius >= 0 );
 
   c = is_list(size) ? size : [size,size,size];
 
   assert( len(c) == 3 );
-  assert( c.x > 2*radius );
-  assert( c.y > 2*radius );
+  assert( is_num(c.z) );
 
-  translate( [0,0,center?-c.z/2:0] )
-    linear_extrude( height=c.z )
-      offset( r=radius )
-	offset( delta=-radius )
-	  square( [c.x,c.y], center=center );
+  linear_extrude( height=c.z, center=center )
+    rounded_side_square( [c.x,c.y], radius, center );
 } // end rounded_side_cube
+
+// rounded_side_cube_upper:
+//
+// Generate a cube of <size> with a round-over <radius> in
+// the X/Y direction. The object is centered on X/Y but with
+// Z positive.
+//
+module rounded_side_cube_upper( size, radius ) {
+  assert( is_num(size) || is_list(size) );
+
+  c = is_list(size) ? size : [size,size,size];
+
+  assert( len(c) == 3 );
+  assert( is_num(c.z) );
+
+  linear_extrude( height=c.z )
+    rounded_side_square( [c.x,c.y], radius, true );
+} // end rounded_side_cube_upper
 
 // rounded_top_cylinder:
 //
