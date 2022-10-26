@@ -13,14 +13,14 @@ to a full case that is simple and quick to print and install.
 
 There is one model:
 
-<div class="model" data-name="Pi Standoff Mount" data-icon-size="128" data-left-icon="pi-standoff-mount.icon.png" data-left="pi-standoff-mount">
+<div class="model" data-name="Pi Standoff Mount" data-icon-size="128" data-left-icon="pi-standoff-mount.icon.png" data-left="pi-standoff-mount"><!-- expanded by annotate-model --><table align="center" width="100%"><tbody><tr width="100%"><td align="center" width="160" height="160"><a href="../media/media/pi-standoff-mount" target="_blank" title="View Pi Standoff Mount Model"><img src="../media/media/pi-standoff-mount.icon.png" alt="Pi Standoff Mount Model" width="128" height="128" /></a></td><td>
 
 ### Mount
 
 The mount has four holes for stand-offs and two holes for wall attachments. Many dimensions
 can be modified and adjusted by working with source and the OpenSCAD customizer.
 
-</div>
+</td></tr></tbody></table></div>
 
 ## Source
 
